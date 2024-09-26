@@ -1864,6 +1864,8 @@ class TCPDF {
 	 * @since 6.4 (2020-07-23)
 	 */
 	protected $allowLocalFiles = false;
+	
+	public $transparency_blend_space = 'DeviceRGB';
 
 	//------------------------------------------------------------
 	// METHODS
@@ -8101,7 +8103,7 @@ class TCPDF {
 			$out .= ' /Contents '.($this->n + 1).' 0 R';
 			$out .= ' /Rotate '.$this->pagedim[$n]['Rotate'];
 			if (!$this->pdfa_mode || $this->pdfa_version >= 2) {
-				$out .= ' /Group << /Type /Group /S /Transparency /CS /DeviceRGB >>';
+				$out .= ' /Group << /Type /Group /S /Transparency /CS /' . $this->transparency_blend_space . ' >>';
 			}
 			if (isset($this->pagedim[$n]['trans']) AND !empty($this->pagedim[$n]['trans'])) {
 				// page transitions
